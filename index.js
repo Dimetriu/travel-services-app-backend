@@ -1,14 +1,9 @@
 require('dotenv').config();
-const Amadeus = require('amadeus');
+const express = require('express');
+const router = require('./routes');
+const { PORT } = require('./amadeus_api');
 
-const credentials = {
-  clientId: process.env.AMADEUS_CLIENT_ID,
-  clientSecret: process.env.AMADEUS_CLIENT_SECRET
-};
+const app = express();
+app.use(router);
 
-const amadeus = new Amadeus({
-  ...credentials,
-  port: 3001,
-  customAppId: process.env.CUSTOM_APP_ID,
-  customAppVersion: process.env.CUSTOM_APP_VERSION
-});
+app.listen(PORT);
